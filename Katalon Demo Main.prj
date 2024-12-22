@@ -8,8 +8,8 @@
    <createdVersion>10.0.0</createdVersion>
    <freeLicense>false</freeLicense>
    <migratedVersion>5.9.0</migratedVersion>
-   <modifiedEdition>FREE</modifiedEdition>
-   <modifiedVersion>10.0.0</modifiedVersion>
+   <modifiedEdition>ENTERPRISE</modifiedEdition>
+   <modifiedVersion>10.0.1</modifiedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
    <projectFileLocation>D:\Data\Katalon Learning\Katalon Main\Katalon Demo Main\Katalon Demo Main.prj</projectFileLocation>
    <sourceContent>

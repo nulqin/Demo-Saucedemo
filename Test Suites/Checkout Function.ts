@@ -15,7 +15,14 @@
       <guid>d4acaee0-b40b-46e2-998f-0eb799debc7d</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/TC_07_Checkout Item</testCaseId>
+      <testCaseId>Test Cases/TC_07_Valid Checkout Item</testCaseId>
+      <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>15f8c890-b3bd-4bc6-a2ca-3af7080a65cf</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/TC_08_Invalid Checkout Item</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
 </TestSuiteEntity>
