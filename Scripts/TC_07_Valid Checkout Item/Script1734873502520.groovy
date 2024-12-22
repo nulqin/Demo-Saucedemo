@@ -64,12 +64,13 @@ WebUI.setText(findTestObject('Object Repository/Checkout/inputPostCode'), postal
 // Continue to Checkout Overview
 WebUI.click(findTestObject('Object Repository/Checkout/continueButton'))
 
-// Function to Extract Numeric Value from Text
+// Function to Extract Numeric Value from Text 
+// If the input is "$12.99", the function returns 12.99 as a BigDecimal.
 def extractNumericValue(String text) {
     return new BigDecimal(text.replaceAll("[^\\d.]", ""))
 }
 
-// Get Price Texts
+// Get Price Texts For Every Item
 def productPricesText = [
     WebUI.getText(findTestObject('Object Repository/Checkout/product1Price')),
     WebUI.getText(findTestObject('Object Repository/Checkout/product2Price')),
@@ -79,23 +80,28 @@ def totalPriceText = WebUI.getText(findTestObject('Object Repository/Checkout/to
 def totalPriceAfterTaxText = WebUI.getText(findTestObject('Object Repository/Checkout/totalPrices'))
 
 // Convert Text to Numeric Values
+// totalPrice and totalPriceAfterTax: These lines convert the total prices (before and after tax) into BigDecimal values.
 BigDecimal[] productPrices = productPricesText.collect { extractNumericValue(it) }
 BigDecimal totalPrice = extractNumericValue(totalPriceText)
 BigDecimal totalPriceAfterTax = extractNumericValue(totalPriceAfterTaxText)
 
 // Calculate Total Price Including Tax
-BigDecimal expectedTotalBeforeTax = productPrices.sum()
-BigDecimal taxRate = new BigDecimal("0.08")
-BigDecimal expectedTotalAfterTax = expectedTotalBeforeTax.multiply(BigDecimal.ONE.add(taxRate)).setScale(2, RoundingMode.HALF_UP)
+//This sums up all the product prices in the productPrices array to get the total price before tax.
+BigDecimal expectedTotalBeforeTax = productPrices.sum() 
+// This defines the tax rate (in this case, 8%).
+BigDecimal taxRate = new BigDecimal("0.08") 
+//This calculates the total price after tax by multiplying the total before tax by (1 + taxRate)
+BigDecimal expectedTotalAfterTax = expectedTotalBeforeTax.multiply(BigDecimal.ONE.add(taxRate)).setScale(2, RoundingMode.HALF_UP) 
 
-// Logging for Verification
+// Log for Verification
 println "Product Prices: $productPrices"
 println "Total Price Before Tax (Extracted): $totalPrice"
 println "Total Price After Tax (Extracted): $totalPriceAfterTax"
 println "Expected Total Before Tax: $expectedTotalBeforeTax"
-println "Expected Total With Tax (Rounded): $expectedTotalAfterTax"
 
 // Verifications
+// This function verifies if the extracted values (totalPrice, totalPriceAfterTax) match the expected values 
+// (expectedTotalBeforeTax, expectedTotalAfterTax).
 WebUI.verifyEqual(totalPrice, expectedTotalBeforeTax, FailureHandling.STOP_ON_FAILURE)
 WebUI.verifyEqual(totalPriceAfterTax, expectedTotalAfterTax, FailureHandling.STOP_ON_FAILURE)
 

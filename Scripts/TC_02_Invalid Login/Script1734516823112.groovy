@@ -27,7 +27,7 @@ WebUI.navigateToUrl(url)
 WebUI.maximizeWindow()
 
 // Get test data from the Data Files
-def Data = findTestData(DataFiles)
+def Data = findTestData(DataFile)
 String username = Data.getValue('Username', 3)
 String password = Data.getValue('Password', 3)
 
