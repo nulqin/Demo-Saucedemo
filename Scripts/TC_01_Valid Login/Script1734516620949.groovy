@@ -39,13 +39,13 @@ String password = Data.getValue('Password', 1)
 // Log Verification
 WebUI.comment("Logging in with Username: ${username} and Password: ${password}")
 
-// Login steps
+// Login
 WebUI.setText(findTestObject('Object Repository/Login/inputUsername'), username)
 WebUI.setText(findTestObject('Object Repository/Login/inputPassword'), password)
 WebUI.click(findTestObject('Object Repository/Login/buttonLogin'))
 WebUI.delay(2)
 
-// Verify successful login
+// Verify success login
 boolean isLoginSuccess = WebUI.verifyElementPresent(findTestObject('Object Repository/Login/validLogin'), 10, FailureHandling.CONTINUE_ON_FAILURE)
 
 // Log the result

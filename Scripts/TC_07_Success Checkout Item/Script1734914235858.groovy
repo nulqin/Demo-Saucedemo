@@ -80,17 +80,17 @@ def totalPriceText = WebUI.getText(findTestObject('Object Repository/Checkout/to
 def totalPriceAfterTaxText = WebUI.getText(findTestObject('Object Repository/Checkout/totalPrices'))
 
 // Convert Text to Numeric Values
-// totalPrice and totalPriceAfterTax: These lines convert the total prices (before and after tax) into BigDecimal values.
+// totalPrice and totalPriceAfterTax: These lines convert the total prices (before and after tax) into BigDecimal values
 BigDecimal[] productPrices = productPricesText.collect { extractNumericValue(it) }
 BigDecimal totalPrice = extractNumericValue(totalPriceText)
 BigDecimal totalPriceAfterTax = extractNumericValue(totalPriceAfterTaxText)
 
 // Calculate Total Price Including Tax
-//This sums up all the product prices in the productPrices array to get the total price before tax.
+//This sums up all the product prices in the productPrices array to get the total price before tax
 BigDecimal expectedTotalBeforeTax = productPrices.sum() 
-// This defines the tax rate (in this case, 8%).
+// This defines the tax rate 8%
 BigDecimal taxRate = new BigDecimal("0.08") 
-//This calculates the total price after tax by multiplying the total before tax by (1 + taxRate)
+//This calculates the total price after tax by multiplying the total before tax
 BigDecimal expectedTotalAfterTax = expectedTotalBeforeTax.multiply(BigDecimal.ONE.add(taxRate)).setScale(2, RoundingMode.HALF_UP) 
 
 // Log for Verification
@@ -101,7 +101,7 @@ println "Expected Total Before Tax: $expectedTotalBeforeTax"
 
 // Verifications
 // This function verifies if the extracted values (totalPrice, totalPriceAfterTax) match the expected values 
-// (expectedTotalBeforeTax, expectedTotalAfterTax).
+// (expectedTotalBeforeTax, expectedTotalAfterTax)
 WebUI.verifyEqual(totalPrice, expectedTotalBeforeTax, FailureHandling.STOP_ON_FAILURE)
 WebUI.verifyEqual(totalPriceAfterTax, expectedTotalAfterTax, FailureHandling.STOP_ON_FAILURE)
 
